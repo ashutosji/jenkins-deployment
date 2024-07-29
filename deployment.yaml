@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: jenkindemo
+  name: jenkindemo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: jenkindemo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: jenkindemo
+    spec:
+      containers:
+      - image: ashutoshji/test:6
+        name: jenkindemo
+        ports:
+        - containerPort: 8080  # Ensure this matches the port your app listens on
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lb-service
+  labels:
+    app: lb-service
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080  # This should match the port the container is exposing
+  selector:
+    app: jenkindemo
