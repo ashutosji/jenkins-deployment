@@ -18,7 +18,7 @@ spec:
         app: jenkindemo
     spec:
       containers:
-      - image: ashutoshji/test:7
+      - image: ashutoshji/test:8
         name: jenkindemo
         ports:
         - containerPort: 8080  # Ensure this matches the port your app listens on
